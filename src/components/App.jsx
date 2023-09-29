@@ -3,10 +3,9 @@
 import { ContactForm } from "./ContactForm/ContactForm";
 import { ContactList } from "./ContactList/ContactList";
 import { Filter } from "./Filter/Filter";
-import { nanoid } from 'nanoid'
+
 import { H1styled, H2styled} from "./Title.styled";
-import { useState } from "react";
-import { useEffect } from "react";
+
 
 
 export const App =()=>{
