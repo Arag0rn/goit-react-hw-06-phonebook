@@ -17,12 +17,12 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
     switch(action.type){
-        case 'contacts/addContact': 
+        case 'contacts/addContact':
         return {
             ...state,
             contacts: [...state.contacts, action.payload],
           };
-        case  'contacts/deletContact': 
+        case  'contacts/deletContact':
         return {
             ...state,
             contacts: state.contacts.filter(contact => contact.id !== action.payload),
@@ -30,7 +30,7 @@ const rootReducer = (state = initialState, action) => {
         default:return state;
     };
 
-    
+
   };
 
 const enhancer = devToolsEnhancer();

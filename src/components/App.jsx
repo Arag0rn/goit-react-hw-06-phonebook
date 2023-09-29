@@ -37,11 +37,7 @@ export const App =()=>{
 //       }
 //  }
 
-//  const deleteContact = contactID => {
-//   setContacts(prevState =>(
-//     prevState.filter(cont => cont.id !== contactID)
-//   ))
-//  }
+
 
 
 
