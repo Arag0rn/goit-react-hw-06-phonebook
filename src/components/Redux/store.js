@@ -1,40 +1,41 @@
-import { createStore } from "redux";
-import { devToolsEnhancer } from "@redux-devtools/extension"
 
-const initialState = {
-    contacts: [
-    {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-    {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-    {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-    {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
-    ],
-    filters: {
-      status: "all",
-    },
+import { configureStore } from "@reduxjs/toolkit";
+import { contactsReducer } from "./contactsSlice";
+import { filterReducer } from "./filterSlice";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage'
+
+
+const persistConfig = {
+  key: 'root',
+  storage,
 };
 
+const persistedReducer = persistReducer(persistConfig, contactsReducer);
+
+export const store = configureStore ({
+  reducer:{
+  contacts: persistedReducer,
+  filter: filterReducer
+  },
+  middleware: (getDefaultMiddleware) =>
+  getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
+  });
 
 
-const rootReducer = (state = initialState, action) => {
-    switch(action.type){
-        case 'contacts/addContact':
-        return {
-            ...state,
-            contacts: [...state.contacts, action.payload],
-          };
-        case  'contacts/deletContact':
-        return {
-            ...state,
-            contacts: state.contacts.filter(contact => contact.id !== action.payload),
-          };
-        default:return state;
-    };
+  export const persistor = persistStore(store);
 
-
-  };
-
-const enhancer = devToolsEnhancer();
-
-
-export const store = createStore(rootReducer, enhancer)
 

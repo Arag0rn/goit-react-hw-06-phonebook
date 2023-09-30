@@ -1,13 +1,23 @@
-import { StyledDiv, InputFilter } from "./Filter.styled"
+import { onFilter } from "components/Redux/filterSlice";
+import { StyledDiv, InputFilter } from "./Filter.styled";
+import { useDispatch } from "react-redux";
 
-export const Filter  = ({onChangeFilter, filter}) =>{
+export const Filter = () => {
+  const dispatch = useDispatch();
 
-    return <StyledDiv>
-        <InputFilter type="text" 
-        value={filter} 
+  const handleInputChange = (event) => {
+    const filterValue = event.target.value;
+    console.log(filterValue); 
+    dispatch(onFilter(filterValue));
+  };
+
+  return (
+    <StyledDiv>
+      <InputFilter
+        type="text"
         placeholder="Search"
-        onChange={event => onChangeFilter(event.target.value)}/>
-       </StyledDiv>
-
-  
-}
+        onChange={handleInputChange}
+      />
+    </StyledDiv>
+  );
+};
