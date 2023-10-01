@@ -1,4 +1,4 @@
-import { onFilter } from "components/Redux/filterSlice";
+import { onFilter } from "Redux/filterSlice";
 import { StyledDiv, InputFilter } from "./Filter.styled";
 import { useDispatch } from "react-redux";
 

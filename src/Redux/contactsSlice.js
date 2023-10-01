@@ -9,17 +9,11 @@ const contactSlice = createSlice({
   reducers: {
     addContact(state, action) {
       const { name, number } = action.payload;
-      if (state.contacts.some(
-        contact => contact.name.toLowerCase() === name.toLowerCase())){
-          alert(`${name} is already in contacts`)
-        return
-      } else {
        state.contacts.push({
         id: nanoid(),
         name,
         number,
       });
-     }
     },
     deleteContact(state, action) {
       const updatedContacts = state.contacts.filter((contact) => contact.id !== action.payload);
