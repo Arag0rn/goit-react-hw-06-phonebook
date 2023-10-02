@@ -6,7 +6,10 @@ export const ContactList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector((state) => state.contacts.contacts);
   const filter = useSelector(state => state.filter)
-  const filteredContacts = contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()))
+  const filteredContacts = contacts.filter((contact) => {
+    console.log(contact); 
+    return contact.name.toLowerCase().includes(filter.toLowerCase());
+  });
 
   return (
     <StyledUl>
